@@ -1,14 +1,12 @@
 package com.testurl.Test;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-@CrossOrigin(originPatterns = "*")
 @RestController
+@CrossOrigin(originPatterns = "*")
 public class GreetingController {
 
     private static final String template = "Hello, %s!";
@@ -25,4 +23,12 @@ public class GreetingController {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
+    @PostMapping("/create_user")
+    public Greeting create_user(@RequestParam(value = "firstname", defaultValue = "") String firstname) {
+        return new Greeting(counter.incrementAndGet(), String.format(template, "hi"));
+    }
+    @PostMapping("/login")
+    public Greeting login() {
+        return new Greeting(counter.incrementAndGet(), String.format(template, "hi"));
+    }
 }
